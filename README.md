@@ -42,13 +42,13 @@ Actualmente:
 
 - HTML5
 
+- JavaScript
 
 Próximamente:
 
 
 - CSS3
 
-- JavaScript
 
 - React
 
@@ -64,7 +64,8 @@ Próximamente:
 
 
 
-🚧 En desarrollo.
+- Version:
+Clase 02
 
 
 
