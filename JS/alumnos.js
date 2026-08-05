@@ -43,6 +43,8 @@ const docentes = [
     }
 ];
 
+
+
 function obtenerAlumnos(){
     return new Promise((resolve) =>{
         setTimeout(() => {
@@ -74,3 +76,20 @@ async function mostrarMaterias() {
     const materias = await obtenerMaterias();
     console.table(materias);
 }
+
+mostrarMaterias();
+
+function obtenerDocentes(){
+    return new Promise((resolve) =>{
+        setTimeout(() => {
+           resolve(docentes) 
+        }, 4000);
+    })
+}
+
+async function mostrarDocentes() {
+    const docentes = await obtenerDocentes();
+    console.table(docentes);
+}
+
+mostrarDocentes();
