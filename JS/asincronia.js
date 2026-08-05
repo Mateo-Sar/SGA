@@ -1,3 +1,4 @@
+/*
 console.log("Inicio");
 setTimeout(()=>{
     console.log("Buscando alumnos...");
@@ -37,3 +38,110 @@ console.log("Abriendo SGA");
 setTimeout(() => {
    console.log("Alumnos cargados") 
 }, 3000);
+
+console.log("El usuario puede seguir navegando");
+*/
+/*
+console.log("solicitando lista de alumnos...");
+
+setTimeout(() => {
+   console.log("Mientras tanto el programa sigue ejecutandose"); 
+}, 1500);
+
+setTimeout(() => {
+    console.log("Lista recibida!");
+}, 5000);*/
+
+function obtenerAlumnos(){
+    return new Promise((resolve) => {
+        setTimeout(() => {
+           resolve(["Ana","Jose","Maria"]) 
+           console.log(["Ana","Jose","Maria"])
+        }, 3000);
+    })
+}
+/*
+obtenerAlumnos().then((alumnos) =>{
+    console.log(alumnos);
+})
+*/
+
+
+async function iniciar() {
+    const alumnos = await obtenerAlumnos()
+    console.log(alumnos);
+}
+
+iniciar();
+
+function obtenerClima(){
+    return new Promise((resolve) => {
+        setTimeout(() => {
+           resolve("22°C - soleado") 
+        }, 2000);
+    })
+}
+
+// con then()
+
+obtenerClima().then((clima) =>{
+    console.log(clima);
+});
+
+async function mostratClima() {
+    const clima = await obtenerClima();
+    console.log(clima);
+    
+}
+
+mostratClima();
+
+function consultarSaldo(){
+    return new Promise((resolve) => {
+        setTimeout(() => {
+           resolve(125000) 
+        }, 4000);
+    })
+}
+
+async function mostrarSaldo() {
+    const saldo = await consultarSaldo();
+    console.log(`Su saldo es: ${saldo}`);
+}
+
+mostrarSaldo();
+
+function iniciarSesion(){
+    return new Promise((resolve) => {
+        setTimeout(() => {
+           resolve("Bienvenido, Steo"); 
+        }, 5000);
+    })
+}
+
+async function saludo(){
+    const mensaje = await iniciarSesion();
+    console.log(mensaje);
+}
+
+saludo();
+
+function obtenerUsuario(){
+    return new Promise((resolve) =>{
+        setTimeout(() => {
+           resolve({
+            id:1,
+            nombre:"Mateo",
+            edad:26
+           }) 
+        }, 5000);
+    })
+}
+
+async function mostrarUsuario() {
+    console.log("Consultando usuario....");
+    const usuario = await obtenerUsuario();
+    console.log(usuario);
+}
+
+mostrarUsuario();
