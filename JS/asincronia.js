@@ -65,7 +65,7 @@ obtenerAlumnos().then((alumnos) =>{
     console.log(alumnos);
 })
 */
-
+/*
 
 async function iniciar() {
     const alumnos = await obtenerAlumnos()
@@ -145,3 +145,59 @@ async function mostrarUsuario() {
 }
 
 mostrarUsuario();
+*/
+
+
+async function obtenerAlumnos(){
+    const respuesta = await fetch("https://jsonplaceholder.typicode.com/users");
+    const alumnos = await respuesta.json();
+   // console.table(alumnos);
+    return alumnos;
+}
+
+
+
+function mostrarAlumnos(alumnos){
+    console.table(alumnos);
+   // console.log(alumnos[5])
+
+    for(const alumno of alumnos){
+        console.log(alumno.id,alumno.name, alumno.email);
+    }
+}
+
+async function iniciar() {
+    const alumnos = await obtenerAlumnos()
+    mostrarAlumnos(alumnos);
+}
+
+iniciar();
+
+// /post
+// /coments
+// Solo ID,titulo,usuario
+
+async function obtenerPosts() {
+    const obtenerPosts = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const post = await obtenerPosts.json();
+    return post;
+
+
+}
+
+
+
+async function cargarPost(post) {
+
+    for(const num of post){
+        console.log("ID: "+num.id,"Titulo: "+num.title,"Cuerpo; "+num.body);
+    }
+}
+
+async function mostrarPost(params){
+    const post = await obtenerPosts();
+    cargarPost(post);
+}
+
+mostrarPost();
+
