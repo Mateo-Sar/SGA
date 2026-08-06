@@ -190,7 +190,7 @@ async function obtenerPosts() {
 async function cargarPost(post) {
 
     for(const num of post){
-        console.log("ID: "+num.id,"Titulo: "+num.title,"Cuerpo; "+num.body);
+        console.log("ID: "+num.id,"Titulo: "+num.title,"Cuerpo: "+num.body);
     }
 }
 
@@ -201,3 +201,21 @@ async function mostrarPost(params){
 
 mostrarPost();
 
+async function ObtenerComentarios(){
+    const contenido = await fetch("https://jsonplaceholder.typicode.com/comments");
+    const comentarios = contenido.json();
+    return comentarios;
+}
+
+async function cargarComentarios(coments){
+    for(const comentarios of coments){
+        console.log(comentarios.id,comentarios.name,comentarios.email)
+    }
+}
+
+async function mostrarComentarios() {
+    const comentarios = await ObtenerComentarios();
+    cargarComentarios(comentarios);
+}
+
+mostrarComentarios();
