@@ -56,6 +56,11 @@ function obtenerAlumnos(){
 async function iniciar(){
     const datos = await obtenerAlumnos();
     console.table(datos);
+    console.log(typeof datos);
+    localStorage.setItem("alumnos",datos);
+    const alumnosRecuperados = JSON.parse(datos)
+    console.log(typeof alumnosRecuperados);
+    console.table(alumnosRecuperados);
 }
 
 iniciar();
