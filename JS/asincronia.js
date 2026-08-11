@@ -51,7 +51,7 @@ setTimeout(() => {
 setTimeout(() => {
     console.log("Lista recibida!");
 }, 5000);*/
-
+/*
 function obtenerAlumnos(){
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -60,6 +60,7 @@ function obtenerAlumnos(){
         }, 3000);
     })
 }
+    */
 /*
 obtenerAlumnos().then((alumnos) =>{
     console.log(alumnos);
@@ -147,7 +148,7 @@ async function mostrarUsuario() {
 mostrarUsuario();
 */
 
-
+/*
 async function obtenerAlumnos(){
     const respuesta = await fetch("https://jsonplaceholder.typicode.com/users");
     const alumnos = await respuesta.json();
@@ -219,3 +220,57 @@ async function mostrarComentarios() {
 }
 
 mostrarComentarios();
+*/
+
+const listaAlumnos = document.querySelector("#listaAlumnos");
+const formulario = document.querySelector("#formAlumno");
+
+
+formulario.addEventListener("submit",function(event){
+    event.preventDefault();
+
+   
+    const nombre = document.querySelector("#nombre").value;
+    const carrera = document.querySelector("#carrera").value;
+    const correo = document.querySelector("#correo").value;
+
+    const alumno ={
+        id:Date.now(),
+        nombre:nombre,
+        carrera:carrera,
+        correo:correo
+    }
+
+    const alumnos = obtenerAlumno();
+    alumnos.push(alumno);
+
+    localStorage.setItem("alumnos",JSON.stringify(alumnos));
+
+    mostrarAlumnos(alumnos);
+
+    formulario.reset;
+
+
+});
+
+
+
+function obtenerAlumno(){
+    const datos = localStorage.getItem("alumnos");
+    if(datos){
+        return JSON.parse(datos)
+    }
+    return[]
+}
+
+function mostrarAlumnos(alumnos){
+    listaAlumnos.innerHTML = "";
+    for(const alumno of alumnos){
+        listaAlumnos.innerHTML += `
+        <li>
+            ${alumno.nombre} -
+            ${alumno.carrera} -
+            ${alumno.correo}
+            </li>`;
+    }
+}
