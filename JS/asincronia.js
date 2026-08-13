@@ -226,27 +226,56 @@ const listaAlumnos = document.querySelector("#listaAlumnos");
 const formulario = document.querySelector("#formAlumno");
 const mensaje = document.querySelector("#mensaje");
 let alumnoEditandoId = null;
+const alumnos = obtenerAlumno();
+
+
 
 formulario.addEventListener("submit",function(event){
     event.preventDefault();
 
    
-    const nombre = document.querySelector("#nombre").value;
-    const carrera = document.querySelector("#carrera").value;
-    const correo = document.querySelector("#correo").value;
+    const nombre = document.querySelector("#nombre").value.trim();
+    const carrera = document.querySelector("#carrera").value.trim();
+    const correo = document.querySelector("#correo").value.trim();
 
-    const alumno ={
+    if(nombre === "" || carrera === "" || correo === ""){
+        mostratMensaje("Todos los campos son obligatorios","mje-error");
+        return
+    }
+
+    if(!correo.includes("@")){
+        mostratMensaje("Ingrese un correo electronico valido","mje-error");
+        return;
+    }
+
+    if(nombre.length<3){
+        mostratMensaje("El nombre debe tener al menos 3 caracteres", "mje-error");
+        return;
+    }
+    
+
+    if(alumnoEditandoId === null)
+        {
+        const alumno ={
         id:Date.now(),
         nombre:nombre,
         carrera:carrera,
         correo:correo
     }
-
-    const alumnos = obtenerAlumno();
+    mostratMensaje("Alumno guardado correctamente","mje-exito");
     alumnos.push(alumno);
+    }else{
+        const alumno = alumnos.find(alumno => alumno.id === alumnoEditandoId)
+        alumno.nombre = nombre;
+        alumno.carrera = carrera;
+        alumno.correo = correo;
+        alumnoEditandoId = null;
+        formulario.querySelector("button").textContent = "Guardar Alumno";
 
+        mostratMensaje("Alumno actualizado correctamente","mje-exito");
+    }
+    
     localStorage.setItem("alumnos",JSON.stringify(alumnos));
-    mostratMensaje("Alumno guardado correctamente");
 
     mostrarAlumnos(alumnos);
 
@@ -255,10 +284,12 @@ formulario.addEventListener("submit",function(event){
 
 });
 
-function mostratMensaje(texto){
+function mostratMensaje(texto,tipo){
     mensaje.textContent = texto;
+    mensaje.className = tipo;
     setTimeout(() => {
         mensaje.textContent = "";
+        mensaje.className = "oculto";
     }, 5000);
 }
 
@@ -294,13 +325,17 @@ function eliminarAlumno(id){
     );
     localStorage.setItem("alumnos",JSON.stringify(alumnosActualizados));
     mostrarAlumnos(alumnosActualizados);
-    mostratMensaje("Alumno eliminado correctamente");
+    mostratMensaje("Alumno eliminado correctamente","mje-exito");
 }
 
 listaAlumnos.addEventListener("click",(e)=> {
     if(e.target.classList.contains("btn-eliminar")){
         const id = Number(e.target.dataset.id);
         eliminarAlumno(id);
+    }
+    if(e.target.classList.contains("btn-editar")){
+        const id = Number(e.target.dataset.id);
+        editarAlumno(id);
     }
 })
 
@@ -311,4 +346,8 @@ function editarAlumno(id){
     document.querySelector("#carrera").value = alumno.carrera;
     document.querySelector("#correo").value = alumno.correo;;
     alumnoEditandoId = id;
+    formulario.querySelector("button").textContent = "Actualizar Alumno";
 }
+
+const alumno = obtenerAlumno();
+mostrarAlumnos(alumno)
