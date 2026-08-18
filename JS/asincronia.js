@@ -325,6 +325,11 @@ function eliminarAlumno(id){
     );
     localStorage.setItem("alumnos",JSON.stringify(alumnosActualizados));
     mostrarAlumnos(alumnosActualizados);
+    if(alumnoEditandoId === id){
+        formulario.reset();
+        alumnoEditandoId = null;
+        formulario.querySelector("button").textContent = "Guardar alumno";
+    }
     mostratMensaje("Alumno eliminado correctamente","mje-exito");
 }
 
