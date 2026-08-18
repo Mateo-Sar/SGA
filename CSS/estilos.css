@@ -98,3 +98,32 @@ th{
 .mje-exito{
     color: green;
 }
+
+.btn-editar, .btn-eliminar{
+border: none;
+padding: 8px 10px;
+border-radius: 8px;
+cursor:pointer;
+margin: 0 3px;
+font-size: 15px;
+}
+
+.btn-editar{
+    background-color: grey;
+    color: black;
+}
+
+.btn-eliminar{
+    background-color: grey;
+    color: red;
+}
+
+.btn-editar:hover{
+    background-color:lightgray;
+    color: white;
+}
+
+.btn-eliminar:hover{
+    background-color: red;
+    color: aliceblue;
+}
