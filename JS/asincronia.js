@@ -362,4 +362,4 @@ function editarAlumno(id){
 }
 
 const alumno = obtenerAlumno();
-mostrarAlumnos(alumno)
+mostrarAlumnos(alumno);
