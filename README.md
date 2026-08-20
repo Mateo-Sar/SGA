@@ -49,7 +49,6 @@ Próximamente:
 
 - CSS3
 
-
 - React
 
 - Node.js
