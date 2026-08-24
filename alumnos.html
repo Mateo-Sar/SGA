@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="JS/asincronia.js" defer></script>
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
      <header>
@@ -12,29 +14,33 @@
         <nav>
         <a href="index.html">Inicio</a>
         <a href="alumnos.html">Alumnos</a>
-        <a href="docentes.html"></a>
+        <a href="docentes.html">Docentes</a>
         </nav>
     </header>
     <main>
-        <section class="formulario">
+        <h1>Gestion de alumnos</h1>
+        <section class="formulario-container">
             <h2>Alta de Alumno</h2>
             <form id="formAlumno">
+            <div class="campo">            
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre"><br><br>
-
+                <input type="text" id="nombre">
+            </div>   
+            <div class="campo">
                 <label for="carrera">Carrera</label>
-                <input type="text" id="carrera"><br><br>
-
+                <input type="text" id="carrera">
+            </div>
+            <div class="campo">
                 <label for="correo">Correo Electronico</label>
-                <input type="email" id="correo"><br><br>
-
+                <input type="email" id="correo">
+            </div>
                 <button type="submit">Guardar</button>
             </form>
         </section>
-        <section class="alumnos">
-            <p id="mensaje" class="oculto"></p>
+        <section class="lista-container">
             <h2>Alumnos registrados</h2>
             <p id="cantidadAlumnos"></p>
+            sec
             <table>
                 <thead>
                     <tr>
@@ -50,6 +56,7 @@
                 </tbody>
             </table>
         </section>
+        <div id="mensaje" class="mensaje"></div>
     </main>
 </body>
 </html>

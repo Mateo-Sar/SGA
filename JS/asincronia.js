@@ -284,12 +284,12 @@ formulario.addEventListener("submit",function(event){
 
 });
 
-function mostratMensaje(texto,tipo){
+function mostratMensaje(texto,clase){
     mensaje.textContent = texto;
-    mensaje.className = tipo;
+    mensaje.className = `mensaje ${clase}`;
+    mensaje.style.display = "block";
     setTimeout(() => {
-        mensaje.textContent = "";
-        mensaje.className = "oculto";
+        mensaje.style.display = "none";
     }, 5000);
 }
 
