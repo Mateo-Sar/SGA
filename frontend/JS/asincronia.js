@@ -228,6 +228,9 @@ const mensaje = document.querySelector("#mensaje");
 let alumnoEditandoId = null;
 const alumnos = obtenerAlumno();
 let alumnoEditar = null;
+const btnCancelar = document.querySelector("#btn-cancelar");
+btnCancelar.style.display = "none";
+const btnGuardar = document.querySelector("#btnGuardar");
 
 
 
@@ -288,7 +291,7 @@ formulario.addEventListener("submit",function(event){
         alumnoEditar = null;
 
         alumnoEditandoId = null;
-        formulario.querySelector("button").textContent = "Guardar Alumno";
+        btnGuardar.textContent = "Guardar Alumno";
 
         mostratMensaje("Alumno actualizado correctamente","mje-exito");
     }
@@ -371,9 +374,25 @@ function editarAlumno(id){
         correo:alumno.correo
     }
     alumnoEditandoId = id;
+    btnCancelar.style.display = "inline-block";
     formulario.querySelector("button").textContent = "Actualizar Alumno";
     document.querySelector("#nombre").focus();
+
+
 }
 
+function cancelarEdicion(){
+ formulario.reset();
+ alumnoEditandoId = null;
+ alumnoEditar = null;
+ btnGuardar.textContent = "Guardar alumno";
+ btnCancelar.style.display = "none";
+ document.querySelector("#nombre").focus();
+}
+
+btnCancelar.addEventListener("click",cancelarEdicion);
 const alumno = obtenerAlumno();
 mostrarAlumnos(alumno);
+
+
+
