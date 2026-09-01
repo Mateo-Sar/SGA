@@ -3,3 +3,38 @@ GET  http://localhost:3000/alumnos
 ###
 
 GET  http://localhost:3000/alumnos/3
+
+###
+
+POST http://localhost:3000/alumnos
+Content-Type: application/json
+
+{
+    "id":6,
+    "nombre":"Mario",
+    "Carrera":"Culinario"
+}
+###
+POST http://localhost:3000/alumnos
+Content-Type: application/json
+
+{
+    "id":7,
+    "nombre":"Emiliano",
+    "Carrera":"Ingenieria nuclear"
+}
+
+###
+
+PUT http://localhost:3000/alumnos/1
+Content-Type: application/json
+
+{
+    "id":1,
+    "nombre":"SartorMateo",
+    "carrera":"Loquito del centro"
+}
+
+###
+
+DELETE http://localhost:3000/alumnos/1
