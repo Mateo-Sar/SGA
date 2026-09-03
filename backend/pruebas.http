@@ -2,7 +2,7 @@ GET  http://localhost:3000/alumnos
 
 ###
 
-GET  http://localhost:3000/alumnos/3
+GET  http://localhost:3000/alumnos/8
 
 ###
 
@@ -37,4 +37,15 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/alumnos/1
+DELETE http://localhost:3000/alumnos/12
+
+###
+
+POST http://localhost:3000/alumnos
+Content-Type: application/json
+
+{
+    "id":8,
+    "nombre":123,
+    "carrera":"Loquito del centro"
+}

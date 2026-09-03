@@ -1,5 +1,10 @@
 # Sistema de Gestión Académica (SGA)
-
+##Estado actual
+-implementacion de validaciones para los datos recibidos
+-Uso de status 400 para datos invalidos
+-status 404 para alumnos no encontrado
+-status 201 para registrar nuevo alumnos
+-
 
 
 Proyecto desarrollado durante la materia Programación IV.
@@ -44,16 +49,16 @@ Actualmente:
 
 - JavaScript
 
-Próximamente:
-
-
 - CSS3
-
-- React
 
 - Node.js
 
 - Express
+
+
+Próximamente:
+
+- React
 
 - MongoDB
 

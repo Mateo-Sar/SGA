@@ -9,8 +9,8 @@
     "dev": "node --watch server.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Mateo",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "express": "^5.2.1"
