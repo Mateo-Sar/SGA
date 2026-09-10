@@ -1,6 +1,5 @@
 const express = require("express");
 const { obtenerAlumnos,obtenerAlumno,crearAlumno,actualizarAlumno,eliminarAlumno } = require("../controllers/alumnos.controllers");
-const alumnos = require("../data/alumnos")
 const router = express.Router();
 
 

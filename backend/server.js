@@ -5,8 +5,10 @@ const alumnosRoutes = require("./routes/alumnos.routes");
 //const docentesRoutes = require("./routes/docentes.routes");
 app.use("/alumnos",alumnosRoutes);
 //app.use("/docentes",docentesRoutes);
+const conectarBD = require("./config/databse")
 
 
+conectarBD();
 // creo un middleware
 app.use((req,res,next)=>{
     console.log(req.method);
