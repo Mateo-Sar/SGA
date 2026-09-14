@@ -20,7 +20,7 @@ POST http://localhost:3000/alumnos
 Content-Type: application/json
 
 {
-    "legajo":1006,
+    "legajo":1007,
     "nombre":"Emiliano",
     "carrera":"Ingenieria nuclear",
     "correo":"emi@gmail.com"
@@ -34,7 +34,7 @@ Content-Type: application/json
 {
     "legajo":1001,
     "nombre":"SartorMateo",
-    "carrera":"Loquito del centro.v2",
+    "carrera":"Loquito del centro.vg",
     "correo":"mateoresa@gmail.com"
 }
 

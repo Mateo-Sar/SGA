@@ -6,6 +6,8 @@ const alumnosRoutes = require("./routes/alumnos.routes");
 app.use("/alumnos",alumnosRoutes);
 //app.use("/docentes",docentesRoutes);
 const conectarBD = require("./config/databse")
+require("dotenv").config()
+const PORT = process.env.PORT;
 
 
 conectarBD();
@@ -20,6 +22,6 @@ app.use((req,res,next)=>{
 
 
 app.listen(3000, ()=>{
-    console.log("Servidor funcionando en http://localhost:3000");
+    console.log(`Servidor funcionando en http://localhost:${PORT}`);
 })
 
