@@ -225,13 +225,13 @@ mostrarComentarios();
 const listaAlumnos = document.querySelector("#listaAlumnos");
 const formulario = document.querySelector("#formAlumno");
 const mensaje = document.querySelector("#mensaje");
-let alumnoEditandoId = null;
-const alumnos = obtenerAlumno();
+let alumnoEditandoLegajo = null;
 let alumnoEditar = null;
-const btnCancelar = document.querySelector("#btn-cancelar");
+const btnCancelar = document.querySelector("#btnCancelar");
 btnCancelar.style.display = "none";
 const btnGuardar = document.querySelector("#btnGuardar");
-
+const API_ALUMNOS = "http://localhost:3000/alumnos";
+/*
 async function cargarDatos() {
     const respuesta = await fetch("http://localhost:3000/alumnos");
     const alumnos = await respuesta.json();
@@ -239,16 +239,16 @@ async function cargarDatos() {
 }
 
 cargarDatos();
-
-formulario.addEventListener("submit",function(event){
+*/
+formulario.addEventListener("submit",async function(event){
     event.preventDefault();
 
-   
+    const legajo = document.querySelector("#legajo").value.trim();
     const nombre = document.querySelector("#nombre").value.trim();
     const carrera = document.querySelector("#carrera").value.trim();
     const correo = document.querySelector("#correo").value.trim();
 
-    if(nombre === "" || carrera === "" || correo === ""){
+    if(legajo === ""||nombre === "" || carrera === "" || correo === ""){
         mostratMensaje("Todos los campos son obligatorios","mje-error");
         return
     }
@@ -263,60 +263,65 @@ formulario.addEventListener("submit",function(event){
         return;
     }
     
-
-    if(alumnoEditandoId === null)
-        {
+    //POST
+    if(alumnoEditandoLegajo === null)
+    {
         const alumno ={
-        id:Date.now(),
+        legajo:Number(legajo),
         nombre:nombre,
         carrera:carrera,
         correo:correo
-    }
-    mostratMensaje("Alumno guardado correctamente","mje-exito");
-    alumnos.push(alumno);
-    }else{
-        const alumno = alumnos.find(alumno => alumno.id === alumnoEditandoId)
-        alumno.nombre = nombre;
-        alumno.carrera = carrera;
-        alumno.correo = correo;
+        }
+
+        const respuesta = await fetch(API_ALUMNOS,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(alumno)
+        });
+        if(!respuesta.ok){
+        mostratMensaje("No se pudo guardar el alumno","mje-error")
+        return
+        }
+        mostratMensaje("Alumno guardado correctamente","mje-exito");
         
+    }else{//PUT
         const datosActuales ={
             nombre:nombre,
             carrera:carrera,
             correo:correo
         }
-       /* if(datosActuales.nombre === alumnoEditar.nombre && datosActuales.carrera === alumnoEditar.carrera && datosActuales.correo === alumnoEditar.correo){
-            mostrarMensaje("No se realizaron cambios","mje-error");
-            return;
-        }*/
+   
        if(JSON.stringify(datosActuales) === JSON.stringify(alumnoEditar)){
-            mostrarMensaje("No se realizaron cambios","mje-error");
+            mostratMensaje("No se realizaron cambios","mje-error");
             return;
        }
-        alumnoEditandoId = null;
+       const respuesta = await fetch(`${API_ALUMNOS}/${alumnoEditandoLegajo}`,{
+        method:"PUT",
+        headers: {"Content-Type":"application/json"},
+        body:JSON.stringify({
+            nombre:nombre,
+            carrera:carrera,
+            correo:correo
+        })
+       });
+       if(!respuesta.ok){
+        mostratMensaje("No se pudo actualizar el alumno")
+       }
+        alumnoEditandoLegajo = null;
         alumnoEditar = null;
-
-        alumnoEditandoId = null;
         btnGuardar.textContent = "Guardar Alumno";
-
+        document.querySelector("#legajo").disabled = false;
         mostratMensaje("Alumno actualizado correctamente","mje-exito");
     }
-    
-    // localStorage.setItem("alumnos",JSON.stringify(alumnos));  borrar despues
-
-    guardarDatos("alumnos",alumnos);
-
-    mostrarAlumnos(alumnos);
-
-    formulario.reset;
-
+    await actualizarListaAlumnos();
+    formulario.reset();
 
 });
 
 
 
- async function obtenerAlumno(){
-    const respuesta = await fetch("http://localhost:3000/alumnos");
+async function obtenerAlumnos(){
+    const respuesta = await fetch(API_ALUMNOS);
     const alumnos = await respuesta.json();
     return alumnos;
 }
@@ -331,48 +336,68 @@ function mostrarAlumnos(alumnos){
             <td>${alumno.carrera}</td>
             <td>${alumno.correo}</td>
             <td>
-            <button class="btn-editar" data-id ="${alumno.legajo}"title="Editar alumno"><i class="fa-solid fa-pen"></i></button>
-            <button class="btn-eliminar" data-id ="${alumno.legajo}"title="Eliminar alumno"><i class="fa-solid fa-trash"></i></button>
+            <button class="btn-editar" data-legajo ="${alumno.legajo}"title="Editar alumno"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn-eliminar" data-legajo ="${alumno.legajo}"title="Eliminar alumno"><i class="fa-solid fa-trash"></i></button>
         </tr>
         `;
     }
 }
 
-function eliminarAlumno(id){
-    const alumnos = obtenerAlumno();    
-    const alumnosActualizados = alumnos.filter(
-        alumno => alumno.id !== id
-    );
-    localStorage.setItem("alumnos",JSON.stringify(alumnosActualizados));
-    mostrarAlumnos(alumnosActualizados);
-    if(alumnoEditandoId === id){
+async function eliminarAlumno(legajo){
+
+    const respuesta = await fetch(`${API_ALUMNOS}/${legajo}`,{
+        method:"DELETE"
+    });
+
+    if(!respuesta.ok){
+        mostratMensaje("No se puedo eliminar el alumno","mje-error")
+        return
+    };
+
+
+    if(alumnoEditandoLegajo === legajo){
         formulario.reset();
-        alumnoEditandoId = null;
+        alumnoEditandoLegajo = null;
         formulario.querySelector("button").textContent = "Guardar alumno";
+        document.querySelector("#legajo").disabled = false;
+        btnCancelar.style.display = "none";
     }
     mostratMensaje("Alumno eliminado correctamente","mje-exito");
+    await actualizarListaAlumnos();
+}
+
+async function actualizarListaAlumnos() {
+    const alumnos = await obtenerAlumnos();
+    mostrarAlumnos(alumnos);
 }
 
 listaAlumnos.addEventListener("click",(e)=> {
     const  boton_el = e.target.closest(".btn-eliminar")
 
     if(boton_el){
-        const id = Number(boton_el.dataset.id);
+        const legajo = Number(boton_el.dataset.legajo);
         const confirmar = confirm("Va a eliminar este alumno, Esta seguro?");
         if (confirmar){
-            eliminarAlumno(id);
+            eliminarAlumno(legajo);
         }
     }
    const boton_ed =e.target.closest(".btn-editar")
     if(boton_ed){
-        const id = Number(boton_ed.dataset.id);
-        editarAlumno(id);
+        const legajo = Number(boton_ed.dataset.legajo);
+        editarAlumno(legajo);
     }
 })
 
-function editarAlumno(id){
-    const alumnos = obtenerAlumno();
-    const alumno = alumnos.find(alumno => alumno.id === id);
+async function editarAlumno(legajo){
+    const alumnos = await obtenerAlumnos();
+    const alumno = alumnos.find(alumno => alumno.legajo === legajo);
+
+    if(!alumno){
+        mostratMensaje("Alumno no encontrado","mje-error")
+        return;
+    }
+    document.querySelector("#legajo").value = alumno.legajo;
+    document.querySelector("#legajo").disabled = true;
     document.querySelector("#nombre").value = alumno.nombre;
     document.querySelector("#carrera").value = alumno.carrera;
     document.querySelector("#correo").value = alumno.correo;
@@ -381,7 +406,7 @@ function editarAlumno(id){
         carrera:alumno.carrera,
         correo:alumno.correo
     }
-    alumnoEditandoId = id;
+    alumnoEditandoLegajo = legajo;
     btnCancelar.style.display = "inline-block";
     formulario.querySelector("button").textContent = "Actualizar Alumno";
     document.querySelector("#nombre").focus();
@@ -391,9 +416,10 @@ function editarAlumno(id){
 
 function cancelarEdicion(){
  formulario.reset();
- alumnoEditandoId = null;
+ alumnoEditandoLegajo = null;
  alumnoEditar = null;
  btnGuardar.textContent = "Guardar alumno";
+ document.querySelector("#legajo").disabled = false;
  btnCancelar.style.display = "none";
  document.querySelector("#nombre").focus();
 }
@@ -401,10 +427,9 @@ function cancelarEdicion(){
 btnCancelar.addEventListener("click",cancelarEdicion);
 
 async function iniciar() {
-    const alumno = await obtenerAlumno();
-    mostrarAlumnos(alumno);
+    await actualizarListaAlumnos();
     
 }
 
-
+iniciar();
 

@@ -1,4 +1,4 @@
-/*const alumnos = [
+const alumnos = [
     {
         id:1,
         nombre:"Mateo"
@@ -99,4 +99,3 @@ async function mostrarDocentes() {
 
 mostrarDocentes();
 
-*/
