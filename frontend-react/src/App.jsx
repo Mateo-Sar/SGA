@@ -6,6 +6,9 @@ import Incremento from "./components/Ejemplos/Incremento";
 import Mostrar from "./components/Ejemplos/Mostrar";
 import CambiarTitulo from "./components/Ejemplos/CambiarTitulo";
 import AdivinarNumero from "./components/Ejemplos/AdivinarNumero";
+import CambiarMensaje from "./components/Ejemplos/CambiarMensaje";
+import CambiarTamanoTexto from "./components/Ejemplos/CambiarTamanoTexto"
+
 function App(){
 
   return(
@@ -19,6 +22,8 @@ function App(){
     <CambiarTitulo/>
     <Incremento/>
     <AdivinarNumero></AdivinarNumero>
+    <CambiarMensaje/>
+    <CambiarTamanoTexto/>
     <Pie/>
     
     </>
