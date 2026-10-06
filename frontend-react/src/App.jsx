@@ -1,3 +1,4 @@
+/*
 import Titulo from "./components/Titulo";
 import {Navbar} from "./components/Navbar";// ejemplo de exportacion nombrada_ mirar archivos
 import Pie from "./components/Footer" // este tipo permite cambiar de nombre en la importacion
@@ -7,11 +8,20 @@ import Mostrar from "./components/Ejemplos/Mostrar";
 import CambiarTitulo from "./components/Ejemplos/CambiarTitulo";
 import AdivinarNumero from "./components/Ejemplos/AdivinarNumero";
 import CambiarMensaje from "./components/Ejemplos/CambiarMensaje";
-import CambiarTamanoTexto from "./components/Ejemplos/CambiarTamanoTexto"
+import CambiarTamanoTexto from "./components/Ejemplos/CambiarTamanoTexto"*/
+import FormularioAlumno from "./components/FormularioAlumno";
 
 function App(){
 
+  
+  
   return(
+
+    <>
+    <FormularioAlumno/>
+    </>
+
+    /*
     <>
     <Titulo texto="Sistema de Gestion Academica doc" color="yellow"/>
     <Navbar/>
@@ -24,10 +34,11 @@ function App(){
     <AdivinarNumero></AdivinarNumero>
     <CambiarMensaje/>
     <CambiarTamanoTexto/>
-    <Pie/>
-    
+    <Pie/
     </>
+    */
   )
+  
 }
 
 export default App
