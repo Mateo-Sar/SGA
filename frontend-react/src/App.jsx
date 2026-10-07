@@ -10,14 +10,27 @@ import AdivinarNumero from "./components/Ejemplos/AdivinarNumero";
 import CambiarMensaje from "./components/Ejemplos/CambiarMensaje";
 import CambiarTamanoTexto from "./components/Ejemplos/CambiarTamanoTexto"*/
 import FormularioAlumno from "./components/FormularioAlumno";
+import Pantalla from "./components/Ejemplos/pantalla";
+import { useEffect, useState } from "react";
 
 function App(){
 
-  
-  
+  const [nombre,setNombre] = useState("")
+
+  useEffect(()=>{
+    if (nombre){
+      document.title = `Hola ${nombre}`
+    } else{
+      document.title = "Mi aplicacion"
+    }
+  },[nombre])
+
   return(
 
     <>
+    <h2>Hola {nombre}</h2>
+    <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder="Escribir nombre" />
+    <Pantalla/>
     <FormularioAlumno/>
     </>
 
