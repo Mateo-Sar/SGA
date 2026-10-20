@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 const API_ALUMNOS = "http://localhost:3000/alumnos"
 
-function ListaAlumnos({ actualizar, onAlumnoCreado }){
+function ListaAlumnos({ actualizar, onAlumnoCreado, onEditarAlumno }){
     const [Alumnos,setAlumnos] = useState([])
     const [cargando,setCargando] = useState(true)
     const [error,setError] = useState("")
@@ -64,6 +64,7 @@ function ListaAlumnos({ actualizar, onAlumnoCreado }){
     {Alumnos.length === 0 ? (<p>No hay alumnos registrados.</p>) : (<ul style={{listStyle:"none"}}>{Alumnos.map(alumno => (
         <li key={alumno.legajo}>
             {alumno.legajo} - {alumno.nombre} - {alumno.carrera} <br />
+            <button type="button" onClick={()=> onEditarAlumno(alumno)}>Editar</button>
             <button type="button" onClick={() => eliminarAlumno(alumno.legajo)}>Eliminar</button>
         </li>
     ))}</ul>)  }

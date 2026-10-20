@@ -1,12 +1,12 @@
 import { useState } from "react";
 const API_ALUMNOS = "http://localhost:3000/alumnos"
 
-function FormularioAlumno({ onAlumnoCreado}){
+function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar}){
     const [formulario,setFormulario] = useState({
-        legajo:"",
-        nombre:"",
-        carrera:"",
-        correo:""
+        legajo: String(alumnoEditar?.legajo ?? ""),
+        nombre:alumnoEditar?.nombre ?? "",
+        carrera:alumnoEditar?.carrera ?? "",
+        correo:alumnoEditar?.correo ?? ""
     })
     const [error,setError] = useState("")
     const [guardando,setGuardando] =  useState(false)
@@ -31,16 +31,20 @@ function FormularioAlumno({ onAlumnoCreado}){
         setError("")
         setGuardando(true)
 
+        const editando = Boolean(alumnoEditar)
+        const url = editando? `${API_ALUMNOS}/${alumnoEditar.legajo}`: API_ALUMNOS
+
         try{
             const alumno = {
                 ...formulario,
                 legajo: Number(formulario.legajo)
             }
-            const respuesta = await fetch(API_ALUMNOS,{
-                method:"POST",
+            const respuesta = await fetch(url,{
+                method: editando ? "PUT" : "POST",
                 header:{"Content-Type":"aplication/json"},
                 body: JSON.stringify(alumno)
             })
+
             if(!respuesta.ok) {
                 throw new Error(`No se pudo guardar el alumno. Estado HTTP: ${respuesta.status}`);
             }
@@ -61,8 +65,13 @@ function FormularioAlumno({ onAlumnoCreado}){
         }
     }
 
+    function cancelar(){
+        onCancelar()
+    }
+
     return(
         <form onSubmit={Guardar} action="">
+            <h2>{alumnoEditar? "Editar Alumno": "Nuevo alumno"}</h2>
             <label htmlFor="nombre">Nombre: </label>
             <input id="nombre" name="nombre" value={formulario.nombre} onChange={manejarCambio} type="text" required /> <br />
 
@@ -75,7 +84,9 @@ function FormularioAlumno({ onAlumnoCreado}){
             <label htmlFor="legajo">Legajo: </label>
             <input id="legajo" name="legajo" value={formulario.legajo} onChange={manejarCambio} type="text" required /> <br />
 
-            <button type="submit" disabled = {guardando}>{guardando ? "Guardando..." : "Guardar"}</button> <br />
+            <button type="submit" disabled = {guardando}>{guardando ? "Guardando..." : alumnoEditar ? "Guardar Cambio" : "Guardar"}</button> <br />
+
+            {alumnoEditar && (<button type="button" onClick={cancelar} disabled={guardando}> Cancelar</button>)}
 
             {error && <p role="alert">{error}</p>}
 

@@ -19,7 +19,7 @@ function App(){
   return(
 
   <>
-    <FormularioAlumno onAlumnoCreado={onAlumnoCreado} key={alumnoEditar?.legajo ?? "nuevo"} alumnoEditar={alumnoEditar}/>
+    <FormularioAlumno onAlumnoCreado={onAlumnoCreado} key={alumnoEditar?.legajo ?? "nuevo"} alumnoEditar={alumnoEditar} onCancelar={() => setAlumnoEditar(null)}/>
     <ListaAlumnos actualizar={actualizar} onAlumnoCreado={onAlumnoCreado} onEditarAlumno={seleccionarAlumno}/> 
   </>
   )
