@@ -3,7 +3,7 @@ import { useColorScheme } from "@mui/material/styles";
 import MaterialUISwitch from "../components/MaterialUISwitch";
 
 function SelectorTema(){
-    const [mode,setMode] = useColorScheme();
+    const {mode,setMode} = useColorScheme();
 
     if(!mode){
         return null

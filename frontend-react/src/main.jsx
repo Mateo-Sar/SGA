@@ -5,11 +5,15 @@ import App from './App.jsx'
 import { ThemeProvider } from '@emotion/react'
 import CssBaseline from '@mui/material/CssBaseline'
 import tema from "../src/tema.js"
+import {BrowserRouter} from "react-router-dom"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider theme={tema} defaultMode = "system"/>
-    <CssBaseline/>
-    <App />
+    <BrowserRouter>
+      <ThemeProvider theme={tema} defaultMode = "system">
+        <CssBaseline/>
+        <App />
+    </ThemeProvider>
+   </BrowserRouter>
   </StrictMode>,
 )
