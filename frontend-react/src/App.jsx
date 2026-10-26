@@ -3,6 +3,7 @@ import FormularioAlumno from "./components/FormularioAlumno"
 import EjemploMui from "./components/Ejemplos/EjemploMui"
 import { useState } from "react"
 import FAQ from "./components/FAQ"
+import SelectorTema from "./components/SelectorTema"
 
 function App(){
 
@@ -25,6 +26,7 @@ function App(){
     <ListaAlumnos actualizar={actualizar} onAlumnoCreado={onAlumnoCreado} onEditarAlumno={seleccionarAlumno}/> 
     <EjemploMui/> <br /><br />
     <FAQ/>
+    <SelectorTema/>
   </>
   )
   
