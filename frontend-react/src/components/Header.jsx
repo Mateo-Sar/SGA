@@ -12,6 +12,8 @@ function Header(){
             {" | "}
             <Link to="/alumnos" >Alumnos</Link>
             {" | "}
+            <Link to="/docentes" >Docentes</Link>
+            {" | "}
             <Link tp="ayuda" aria-label="ayuda">?</Link>
             <SelectorTema/>
 

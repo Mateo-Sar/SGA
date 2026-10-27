@@ -5,6 +5,7 @@ import SelectorTema from "./components/SelectorTema"
 import Alumnos from "./pages/Alumnos"
 import {Routes,Route} from "react-router-dom"
 import LayoutPrincipal from "./layout/LayoutPrincipal"
+import Docentes from "./pages/Docentes"
 import Inicio from "./pages/Inicio"
 function App(){
 
@@ -16,6 +17,7 @@ function App(){
     <Route path="/" element={<LayoutPrincipal/>}/>
     <Route index element = {<Inicio/>}/>
     <Route path="alumnos" element={<Alumnos/>}/>
+    <Route path="docentes" element={<Docentes/>}/>
     <Route path="ayuda" element={<FAQ/>}/>
   </Routes>
   </>
