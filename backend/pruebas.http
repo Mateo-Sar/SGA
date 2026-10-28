@@ -52,3 +52,20 @@ Content-Type: application/json
     "nombre":123,
     "carrera":"Loquito del centro"
 }
+
+###
+
+GET http://localhost:3000/docentes
+
+###
+
+POST http://localhost:3000/docentes
+
+Content-Type: application/json
+
+{
+    "dni":42927832,
+    "nombre":"Mateo",
+    "especialidad":"Loquito del centro",
+    "correo":"mateoresa@gmail.com"
+}
