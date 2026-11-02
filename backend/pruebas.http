@@ -69,3 +69,14 @@ Content-Type: application/json
     "especialidad":"Loquito del centro",
     "correo":"mateoresa@gmail.com"
 }
+
+###
+
+POST http://localhost:3000/auth/login
+
+Content-Type: application/json
+
+{
+    "email":"admin@gmail.com",
+    "password":"ClavedePrueba123¡"
+}

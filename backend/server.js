@@ -6,10 +6,12 @@ app.use(express.json())
 
 const alumnosRoutes = require("./routes/alumnos.routes");
 const docentesRoutes = require("./routes/docentes.routes");
+const authRoutes = require("./routes/authRoutes")
 
 //const docentesRoutes = require("./routes/docentes.routes");
 app.use("/alumnos",alumnosRoutes);
 app.use("/docentes",docentesRoutes);
+app.use("/auth",authRoutes);
 //app.use("/docentes",docentesRoutes);
 const conectarBD = require("./config/databse")
 require("dotenv").config()
