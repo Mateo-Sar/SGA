@@ -36,4 +36,4 @@ async function crearUsuario (){
 
 crearUsuario();
 
-module.exports = crearUsuario;
+//module.exports = crearUsuario;
