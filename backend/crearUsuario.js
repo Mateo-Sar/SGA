@@ -10,7 +10,7 @@ async function crearUsuario (){
 
         await mongoose.connect(process.env.MONGO_URI)
         const email = "admin@gmail.com"
-        const password = "ClavedePrueba123¡"
+        const password = "ClavedePrueba"
 
         const hash = await bcrypt.hash(password,10);
 
@@ -35,3 +35,5 @@ async function crearUsuario (){
 }
 
 crearUsuario();
+
+module.exports = crearUsuario;

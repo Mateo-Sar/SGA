@@ -14,7 +14,8 @@ const login = async (req,res) => {
         const usuario = await Usuario.findOne({email:email.trim().toLowerCase()}).select("+password");
 
         if(!usuario){
-            return res.status(401).json({mensaje:"Email o contraseña incorrecto"})
+            return res.status(401).json({mensaje:"Email o contraseña incorrecto"+ password + email}) 
+
         }
         const coincide = await bcrypt.compare(password,usuario.password)
 
