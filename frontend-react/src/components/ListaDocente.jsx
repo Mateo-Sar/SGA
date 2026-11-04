@@ -75,3 +75,4 @@ function ListaDocentes({ actualizar, onDocenteCreado, onEditarDocente }){
 }
 
 export default ListaDocentes;
+

@@ -1,26 +1,31 @@
-
-//import EjemploMui from "./components/Ejemplos/EjemploMui"
+/*
+import EjemploMui from "./components/Ejemplos/EjemploMui"
 import FAQ from "./components/FAQ"
 import SelectorTema from "./components/SelectorTema"
 import Alumnos from "./pages/Alumnos"
 import {Routes,Route} from "react-router-dom"
 import LayoutPrincipal from "./layout/LayoutPrincipal"
 import Docentes from "./pages/Docentes"
-import Inicio from "./pages/Inicio"
+import Inicio from "./pages/Inicio"*/
+import  Login  from "./pages/Login"
 function App(){
 
   return(
+    <Login/>
+    /*
+    <>
+    <Routes>
+      <Route element={<SelectorTema/>}/>
+      <Route path="/" element={<LayoutPrincipal/>}/>
+      <Route index element = {<Inicio/>}/>
+      <Route path="alumnos" element={<Alumnos/>}/>
+      <Route path="docentes" element={<Docentes/>}/>
+      <Route path="ayuda" element={<FAQ/>}/>
+    </Routes>
+    </>
+    */
 
-  <>
-  <Routes>
-    <Route element={<SelectorTema/>}/>
-    <Route path="/" element={<LayoutPrincipal/>}/>
-    <Route index element = {<Inicio/>}/>
-    <Route path="alumnos" element={<Alumnos/>}/>
-    <Route path="docentes" element={<Docentes/>}/>
-    <Route path="ayuda" element={<FAQ/>}/>
-  </Routes>
-  </>
+
   )
   
 }
